@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 
+const { isInteger }     = require('./numeric');
 const { random, range } = require('./random');
 
 module.exports = { array, copy, isArray, isEmpty, pick, product, shuffle, tail };
@@ -165,15 +166,19 @@ function shuffle(arr, rand = random) {
 /**
  * Returns an Array containing the last {n} elements of a given Array {arr}.
  *
- * @param   {Array.<*>} arr - The Array to return from.
- * @param   {number}    n   - The number of elements to discard.
- * @returns {Array.<*>}     - The Array, trimmed.
+ * @param   {Array.<*>} arr  - The Array to return from.
+ * @param   {number}    n    - The number of elements to discard.
+ * @returns {Array.<*>}      - The Array, trimmed.
+ * @throws  {AssertionError} - If {arr} is not an Array and {n} is not >= 0.
  * @public
  * @example
  *     const arr = [ 1, 2, 3, 4, 5 ];
  *     tail(arr, 3); // [ 3, 4, 5 ];
  */
 function tail(arr, n) {
+    assert(isArray(arr), '{arr} must be an Array');
+    assert(isInteger(n) && n > 0, '{n} must be a positive, nonzero integer');
+
     return (arr.length >= n)
         ? arr.slice(arr.length - n)
         : arr;

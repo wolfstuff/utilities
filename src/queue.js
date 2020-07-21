@@ -1,9 +1,6 @@
 'use strict';
 
-const assert = require('assert');
-
-const { copy, isArray, tail } = require('./array');
-const { isInteger } = require('./numeric');
+const { copy, tail } = require('./array');
 
 module.exports = { queue };
 
@@ -24,7 +21,6 @@ module.exports = { queue };
  * @param   {number}    size     - The size to constrain the queue to.
  * @param   {Array.<*>} [arr=[]] - An optional Array to base the queue on.
  * @returns {Queue}              -
- * @throws  {AssertionError}     - If {size} is not a number or {arr} is not an Array.
  * @public
  * @example
  *     const only3 = queue(3, [ 1, 2, 3 ]);
@@ -33,9 +29,6 @@ module.exports = { queue };
  *     only3.contents; // [ 2, 3, 4 ]
  */
 function queue(size, arr = []) {
-    assert(isInteger(size) && size > 0, '{size} must be a positive, nonzero integer');
-    assert(isArray(arr), '{arr} must be an Array');
-
     // The underlying Array managed by the queue wrapper object.
     let _ = tail(arr, size);
 
