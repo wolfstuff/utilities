@@ -16,7 +16,7 @@ module.exports = { queue };
  */
 
 /**
- * Does the thing.
+ * Creates a revolving queue of fixed size.
  *
  * @param   {number}    size     - The size to constrain the queue to.
  * @param   {Array.<*>} [arr=[]] - An optional Array to base the queue on.
