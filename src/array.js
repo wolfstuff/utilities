@@ -28,7 +28,7 @@ function array(n, fill) {
 }
 
 /**
- * Shallowly copies a given Array {arr}. If you want deep copying, see `util/clone.js`.
+ * Shallowly copies a given Array {arr}. If you want deep copying, see `./clone.js`.
  *
  * @param   {Array.<*>} arr  - An Array to copy.
  * @returns {Array.<*>}      - A shallow copy of {arr}.
