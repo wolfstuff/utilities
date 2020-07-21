@@ -1,0 +1,30 @@
+{
+    "name": "utilities",
+    "version": "1.0.0",
+    "description": "A collection of useful utility functions.",
+    "author": {
+        "name": "Emmanuelle"
+    },
+    "contributors": [],
+    "license": "UNLICENSED",
+    "private": true,
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wolfstuff/utilities.git"
+    },
+    "bugs": {
+        "url": "https://github.com/wolfstuff/utilities/issues"
+    },
+    "homepage": "https://github.com/wolfstuff/utilities#readme",
+    "scripts": {
+        "eslint": "eslint src/**/*.js"
+    },
+    "engines": {
+        "node": "^12.18.2"
+    },
+    "devDependencies": {
+        "eslint": "^7.5.0",
+        "eslint-plugin-jsdoc": "^30.0.3"
+    }
+}
