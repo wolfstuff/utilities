@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 
-module.exports = { isString, isURL };
+module.exports = { isString, isURL, titleCase };
 
 /**
  * Determines whether a given {thing} is a string or not. Does not work on String
@@ -44,4 +44,30 @@ function isURL(str) {
     assert(isString(str), '{str} must be a string');
 
     return url_expr.test(str);
+}
+
+/**
+ * Converts a given string {str} to title case.
+ *
+ * @param   {string} str     - A string to title case.
+ * @returns {string}         - {str}, but title cased.
+ * @throws  {AssertionError} - If {str} is not a string.
+ * @public
+ * @example
+ *     titleCase('hello, world!'); // 'Hello, World!'
+ */
+function titleCase(str) {
+    assert(isString(str), '{str} must be a string');
+
+    if (str.length === 0) {
+        return str;
+    }
+
+    return str.toLowerCase()
+        .trim()
+        .split(' ')
+        .map((word) => {
+            return word.replace(word[0], word[0].toUpperCase());
+        })
+        .join(' ');
 }
