@@ -10,5 +10,6 @@ const object  = require('./object');
 const random  = require('./random');
 const timing  = require('./timing');
 const queue   = require('./queue');
+const string  = require('./string');
 
-module.exports = { array, clone, colors, io, load, numeric, object, random, timing, queue };
+module.exports = { array, clone, colors, io, load, numeric, object, random, timing, queue, string };
