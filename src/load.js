@@ -1,7 +1,7 @@
 'use strict';
 
-const { readdirSync }   = require('fs');
-const { extname, join } = require('path');
+const { readdirSync }             = require('fs');
+const { basename, extname, join } = require('path');
 
 module.exports = { loadDirectory, loadSubdirectories };
 
@@ -75,7 +75,7 @@ function load(dir, filter) {
  */
 function requireReducer(dir) {
     return function(results, each) {
-        results[each.name] = require(join(dir, each.name));
+        results[basename(each.name, '.js')] = require(join(dir, each.name));
 
         return results;
     };
