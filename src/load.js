@@ -50,7 +50,7 @@ function loadSubdirectories(dir) {
  * Loads a given directory {dir} of JavaScript files using Node.js's `require` function.
  * A {filter} function determines which files are loaded.
  *
- * @param   {string} dir      - The directory to load.
+ * @param   {string}   dir    - The directory to load.
  * @param   {Function} filter - A function that determines which files to load.
  * @returns {object}          - An object of loaded files.
  * @private

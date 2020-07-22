@@ -3,7 +3,7 @@
 const assert = require('assert');
 
 const { has, isObject, object } = require('./object');
-const { isArray } = require('./array');
+const { isArray }               = require('./array');
 
 module.exports = { cloneArray, cloneObject };
 
