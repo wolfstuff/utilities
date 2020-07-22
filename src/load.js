@@ -58,7 +58,9 @@ function loadSubdirectories(dir) {
  *     const files = load('./', myFilterFn);
  */
 function load(dir, filter) {
-    return readdirSync(dir, { withFileTypes: true }, filter, requireReducer(dir), {});
+    return readdirSync(dir, { withFileTypes: true })
+        .filter(filter)
+        .reduce(requireReducer(dir), {});
 }
 
 /**
