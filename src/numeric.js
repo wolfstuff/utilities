@@ -41,7 +41,7 @@ function isInteger(thing) {
  * @example
  *     isNaN(1); // false
  *     isNaN(1.4); // false
- *     isNaN('Hello, world!'); // true
+ *     isNaN(NaN); // true
  */
 function isNaN(thing) {
     return Number.isNaN(thing);
