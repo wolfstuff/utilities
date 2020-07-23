@@ -23,7 +23,7 @@ module.exports = { array, copy, isArray, isEmpty, pick, product, shuffle, tail }
  *     const arr2 = array(-1); // AssertionError
  */
 function array(n, fill) {
-    assert(n >= 0, 'Array length must be 0 or greater');
+    assert(isInteger(n) && n >= 0, 'Array length must be an integer value of 0 or greater');
 
     return new Array(n).fill(fill);
 }
