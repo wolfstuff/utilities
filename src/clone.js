@@ -50,10 +50,10 @@ function cloneArray(arr) {
  *     obj2.inner.bool; // false
  */
 function cloneObject(obj) {
-    if (!isObject(obj)) {
-        return obj;
-    } else if (isArray(obj)) {
+    if (isArray(obj)) {
         return cloneArray(obj);
+    } else if (!isObject(obj)) {
+        return obj;
     }
 
     const newObj = object();
