@@ -129,9 +129,10 @@ function isNull(thing) {
  *     isObject({}); // true
  *     isObject(1); // false
  *     isObject(null); // false
+ *     isObject([]); // false
  */
 function isObject(thing) {
-    return typeof thing === 'object' && !isNull(thing);
+    return typeof thing === 'object' && !isNull(thing) && !Array.isArray(thing);
 }
 
 /**
