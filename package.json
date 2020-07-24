@@ -18,13 +18,18 @@
     },
     "homepage": "https://github.com/wolfstuff/utilities#readme",
     "scripts": {
-        "eslint": "eslint src/**/*.js"
+        "ava": "nyc --reporter=lcov --reporter=text-summary ava --verbose test/**/*.test.js",
+        "eslint": "eslint src/**/*.js",
+        "test": "npm run eslint && npm run ava"
     },
     "engines": {
         "node": "^12.18.2"
     },
     "devDependencies": {
+        "ava": "^3.10.1",
         "eslint": "^7.5.0",
-        "eslint-plugin-jsdoc": "^30.0.3"
+        "eslint-plugin-jsdoc": "^30.0.3",
+        "nyc": "^15.1.0",
+        "proxyquire": "^2.1.3"
     }
 }
