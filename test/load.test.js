@@ -41,6 +41,12 @@ test('#loadDirectory: should load all the JavaScript files in a directory that a
     t.true(result.hasOwnProperty('file'), 'Did not load the directory!');
 });
 
+test('#loadDirectory: should not load any JavaScript files in a directory that are `index.js`', (t) => {
+    const result = loadDirectory('./target');
+
+    t.false(result.hasOwnProperty('index'), 'Loaded `index.js`!');
+});
+
 // #loadSubdirectories
 test('#loadSubdirectories: should load all the subdirectories (`sub/index.js`) in a directory', (t) => {
     const result = loadSubdirectories('./target');
