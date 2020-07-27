@@ -4,6 +4,9 @@ const test       = require('ava');
 const { join }   = require('path');
 const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
 
+const no  = () => false;
+const yes = () => true;
+
 const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
     [ join('target', 'file1.js') ]: {},
     [ join('target', 'file2.js') ]: {},
@@ -12,36 +15,12 @@ const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
     fs: {
         readdirSync: function readDirStub(path, options) {
             return [
-                {
-                    name: 'index.js',
-                    isDirectory: () => false,
-                    isFile: () => true
-                },
-                {
-                    name: 'file1.js',
-                    isDirectory: () => false,
-                    isFile: () => true
-                },
-                {
-                    name: 'file2.js',
-                    isDirectory: () => false,
-                    isFile: () => true
-                },
-                {
-                    name: 'hello_world.txt',
-                    isDirectory: () => false,
-                    isFile: () => true
-                },
-                {
-                    name: 'subdirectory1',
-                    isDirectory: () => true,
-                    isFile: () => false
-                },
-                {
-                    name: 'subdirectory2',
-                    isDirectory: () => true,
-                    isFile: () => false
-                }
+                { name: 'index.js',        isDirectory: no,  isFile: yes },
+                { name: 'file1.js',        isDirectory: no,  isFile: yes },
+                { name: 'file2.js',        isDirectory: no,  isFile: yes },
+                { name: 'hello_world.txt', isDirectory: no,  isFile: yes },
+                { name: 'subdirectory1',   isDirectory: yes, isFile: no },
+                { name: 'subdirectory2',   isDirectory: yes, isFile: no }
             ];
         }
     }
