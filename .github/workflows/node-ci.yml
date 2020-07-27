@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-        - 'test/*'
+      - 'test/*'
 
 jobs:
   test:
@@ -17,13 +17,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Check Out Repository
+      uses: actions/checkout@v2
 
-    - uses: actions/setup-node@v2-beta
+    - name: Install Node.js
+      uses: actions/setup-node@v2-beta
       with:
         node-version: '^12.18.2'
 
-    - uses: actions/cache@v2
+    - name: Cache npm Dependencies
+      uses: actions/cache@v2
       env:
         cache-name: cache-node-modules
       with:
@@ -34,7 +37,7 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - name: Install Dependencies
+    - name: Install npm Dependencies
       run: npm install
 
     - name: Run Tests
