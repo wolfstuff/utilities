@@ -5,8 +5,10 @@ const { join }   = require('path');
 const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
 
 const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
-    [ join('target', 'file.js') ]: {},
-    [ join('target', 'subdirectory') ]: {},
+    [ join('target', 'file1.js') ]: {},
+    [ join('target', 'file2.js') ]: {},
+    [ join('target', 'subdirectory1') ]: {},
+    [ join('target', 'subdirectory2') ]: {},
     fs: {
         readdirSync: function readDirStub(path, options) {
             return [
@@ -16,7 +18,12 @@ const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
                     isFile: () => true
                 },
                 {
-                    name: 'file.js',
+                    name: 'file1.js',
+                    isDirectory: () => false,
+                    isFile: () => true
+                },
+                {
+                    name: 'file2.js',
                     isDirectory: () => false,
                     isFile: () => true
                 },
@@ -26,31 +33,40 @@ const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
                     isFile: () => true
                 },
                 {
-                    name: 'subdirectory',
+                    name: 'subdirectory1',
                     isDirectory: () => true,
                     isFile: () => false
                 },
+                {
+                    name: 'subdirectory2',
+                    isDirectory: () => true,
+                    isFile: () => false
+                }
             ];
         }
     }
 });
 
 // #loadDirectory
-test('#loadDirectory: should load all the JavaScript files in a directory that are not `index.js`', (t) => {
+test('#loadDirectory: should load all JavaScript files in target directory except `index.js`', (t) => {
     const result = loadDirectory('./target');
 
-    t.true(result.hasOwnProperty('file'), 'Did not load the directory!');
-});
-
-test('#loadDirectory: should not load any JavaScript files in a directory that are `index.js`', (t) => {
-    const result = loadDirectory('./target');
-
+    t.true(result.hasOwnProperty('file1'), 'Did not load `file1.js`!');
+    t.true(result.hasOwnProperty('file2'), 'Did not load `file1.js`!');
     t.false(result.hasOwnProperty('index'), 'Loaded `index.js`!');
+    t.false(result.hasOwnProperty('hello_world'), 'Loaded `hello_world.txt`!');
+    t.false(result.hasOwnProperty('subdirectory1'), 'Loaded `subdirectory1`!');
+    t.false(result.hasOwnProperty('subdirectory2'), 'Loaded `subdirectory2`!');
 });
 
 // #loadSubdirectories
-test('#loadSubdirectories: should load all the subdirectories (`sub/index.js`) in a directory', (t) => {
+test('#loadSubdirectories: should load all subdirectorie index files (`sub/index.js`) in target directory', (t) => {
     const result = loadSubdirectories('./target');
 
-    t.true(result.hasOwnProperty('subdirectory'), 'Did not load the subdirectories!');
+    t.true(result.hasOwnProperty('subdirectory1'), 'Did not load `subdirectory1`!');
+    t.true(result.hasOwnProperty('subdirectory2'), 'Did not load `subdirectory2`!');
+    t.false(result.hasOwnProperty('file1'), 'Loaded `file1.js`!');
+    t.false(result.hasOwnProperty('file2'), 'Loaded `file1.js`!');
+    t.false(result.hasOwnProperty('index'), 'Loaded `index.js`!');
+    t.false(result.hasOwnProperty('hello_world'), 'Loaded `hello_world.txt`!');
 });
