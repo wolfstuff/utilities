@@ -1,10 +1,11 @@
 name: Node.js CI
 
-on: [push, pull_request]
-  branches:
-    - master
-  paths:
-    - 'test/*'
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'test/*'
 
 jobs:
   test:
