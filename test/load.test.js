@@ -1,11 +1,12 @@
 'use strict';
 
 const test       = require('ava');
+const { join }   = require('path');
 const proxyquire = require('proxyquire').noPreserveCache().noCallThru();
 
 const { loadDirectory, loadSubdirectories } = proxyquire('../src/load', {
-    'target\\file.js': {},
-    'target\\subdirectory': {},
+    [ join('target', 'file.js') ]: {},
+    [ join('target', 'subdirectory') ]: {},
     fs: {
         readdirSync: function readDirStub(path, options) {
             return [
