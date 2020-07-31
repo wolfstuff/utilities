@@ -26,7 +26,7 @@ function isString(thing) {
  * @type {RegExp}
  * @private
  */
-const url_expr = /^(?:https?|ftp|file):\/\/[A-Za-z0-9+&@#/%?=~_|!:,.;-]*[A-Za-z0-9+&@#/%=~_|-]$/imu;
+const url_expr = /^(?:https?|ftp|file):\/\/[a-z0-9+&@#/%?=~_|!:,.;-]*[a-z0-9+&@#/%=~_|-]$/iu;
 
 /**
  * Determines whether a given string {str} is a valid URL or not.
@@ -43,7 +43,7 @@ const url_expr = /^(?:https?|ftp|file):\/\/[A-Za-z0-9+&@#/%?=~_|!:,.;-]*[A-Za-z0
 function isURL(str) {
     assert(isString(str), '{str} must be a string');
 
-    return url_expr.test(str);
+    return url_expr.test(str.trim());
 }
 
 /**
