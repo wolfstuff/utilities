@@ -18,11 +18,32 @@ module.exports = { loadDirectory, loadSubdirectories };
  *     const files = loadDirectory('./');
  */
 function loadDirectory(dir) {
-    return load(dir, (each) => {
-        return each.isFile()
-            && each.name !== 'index.js'
-            && extname(each.name) === '.js';
-    });
+    return load(dir, isValidFileTarget);
+}
+
+/**
+ * A directory entry from fs.readdirSync.
+ *
+ * @typedef {object} Dirent
+ * @private
+ */
+
+/**
+ * Determines whether a given {file} is a valid target for loading.
+ *
+ * @param   {Dirent} file - A directory entry to check.
+ * @returns {boolean}     - True if the file is valid, false if it is not.
+ * @private
+ * @example
+ *     isValidFileTarget(goodFile); // true
+ *     isValidFileTarget(indexJs); // false
+ *     isValidFileTarget(txtFile); // false
+ *     isValidFileTarget(directory); // false
+ */
+function isValidFileTarget(file) {
+    return file.isFile()
+        && file.name !== 'index.js'
+        && extname(file.name) === '.js';
 }
 
 /**
