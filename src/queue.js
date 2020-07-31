@@ -58,13 +58,30 @@ function queue(size, arr = []) {
          * @public
          * @example
          *     const only3 = queue(3, [ 1, 2, 3 ]);
-         *     only3.empty();
-         *     only3.contents(); // []
+         *     only3.empty().contents(); // []
          */
         empty: () => {
             _ = [];
 
             return wrapper;
+        },
+
+        /**
+         * Returns the last element in the queue, which is the first element in the
+         * underlying Array.
+         *
+         * @returns {*|null} - The first element in the underlying Array, or null.
+         * @public
+         * @example
+         *     const only3 = queue(3, [ 1, 2, 3 ]);
+         *     const last = only3.last(); // 1
+         *     only3.push(4).contents(); // [ 2, 3, 4 ]
+         *     last; // 1
+         */
+        last: () => {
+            return _.length > 0
+                ? _[0]
+                : null;
         },
 
         /**
@@ -75,10 +92,8 @@ function queue(size, arr = []) {
          * @public
          * @example
          *     const only3 = queue(3, [ 1, 2 ]);
-         *     only3.push(3);
-         *     only3.contents(); // [ 1, 2, 3 ]
-         *     only3.push(4);
-         *     only3.contents(); // [ 2, 3, 4 ]
+         *     only3.push(3).contents(); // [ 1, 2, 3 ]
+         *     only3.push(4).contents(); // [ 2, 3, 4 ]
          */
         push: (el) => {
             _.push(el);
