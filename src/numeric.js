@@ -59,7 +59,7 @@ function isNaN(thing) {
  *     isNumber('Hello, world!'); // false
  */
 function isNumber(thing) {
-    return Number(thing) === thing && !isNaN(thing);
+    return Number.isFinite(thing);
 }
 
 /**
