@@ -52,7 +52,7 @@ function queue(size, arr = []) {
         contents: () => copy(_),
 
         /**
-         * Empies the underlying Array by swapping it for an empty Array.
+         * Empties the underlying Array by swapping it for an empty Array.
          *
          * @returns {Queue} - The queue being operated on.
          * @public
