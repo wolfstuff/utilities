@@ -5,10 +5,10 @@ const test = require('ava');
 const { queue } = require('../src').queue;
 
 // #queue
-test('#queue: should return an object with #contents, #empty, #push, and #size methods', (t) => {
+test('#queue: should return an object with #contents, #empty, #last, #push, and #size methods', (t) => {
     const result = queue(1);
 
-    [ 'contents', 'empty', 'push', 'size' ].forEach((method) => {
+    [ 'contents', 'empty', 'last', 'push', 'size' ].forEach((method) => {
         t.true(result.hasOwnProperty(method) && typeof result[method] === 'function', `Does not have ${ method } method!`);
     });
 });
@@ -33,6 +33,19 @@ test('#queue.empty: should empty the underlying Array', (t) => {
     result.empty();
 
     t.true(result.contents().length === 0, 'Did not empty the underlying Array!');
+});
+
+// #queue.last
+test('#queue.last: should return the first element in the underlying Array', (t) => {
+    const result = queue(3, [ 1, 2, 3 ]);
+
+    t.true(result.last() === 1, 'Did not return the first element in the underlying Array!');
+});
+
+test('#queue.last: should return null if the underlying Array is Empty', (t) => {
+    const result = queue(3, []);
+
+    t.true(result.last() === null, 'Did not return null!');
 });
 
 // #queue.push
